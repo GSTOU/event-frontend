@@ -52,7 +52,7 @@ export  const  EventsList = ()=> {
                             <div>{item?.location?.name}</div>
                             <div>{item?.date}, {item?.time?.[0][0]}:{item?.time?.[0][1]}-{item?.time?.[1][0]}:{item?.time?.[1][1]}</div>
                           </div>
-                          <div className="font-bold">{item?.title}</div>
+                          <div className="font-bold text-xl mt-2">{item?.title}</div>
                           <div className="text-gray-400">Описание:</div>
                           <div>{item?.description}</div>
                           <div className="text-gray-400">Руководитель мероприятия:</div>
