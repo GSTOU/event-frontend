@@ -2,14 +2,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useQuery } from '@tanstack/react-query';
 
-import { apiClient } from "../libs/axios";
 
 
-export const getEventsList = async ({
-    page,size,
-}:{
-    page: number;
-    size: number;
+export const getEventsList = async ({}:{
+    page?: number;
+    size?: number;
 }) => {
     // const { data } = await apiClient.get(
     //   `/api/v1/public/events`,
@@ -20,6 +17,7 @@ export const getEventsList = async ({
     //     }
     //   }
     // );
+
 
     return {
         "count": 0,
@@ -144,7 +142,7 @@ export const getEventsList = async ({
           },
         ]
       }
-    return data;
+    // return data;
 
     
   };

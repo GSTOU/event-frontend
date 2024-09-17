@@ -72,7 +72,7 @@ export  const  EventsList = ()=> {
         <div className="flex justify-end mt-4 pr-8">
           <Pagination 
            classNames={{control: "!bg-my-blue !text-white data-[active=true]:!bg-my-red data-[active=true]:!border-my-blue data-[disabled=true]:!opacity-40"}}
-           total={Math.ceil(count / pageSize) || 0}  
+           total={Math.ceil(count || 0 / pageSize) || 0}  
            value={page} 
            onChange={onChange} />
         </div>
