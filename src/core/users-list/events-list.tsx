@@ -63,8 +63,7 @@ export  const  EventsList = ()=> {
                           <div className="font-bold">{item?.categories?.name}</div>
                         </div>
                         <div className="flex flex-wrap gap-2 p-2 pt-0">
-                          <Badge color="gray" >Фонд «Росконгресс»</Badge>
-                          <Badge color="gray" >Безопасность</Badge>
+                          {item?.tags?.map((i:string)=> <Badge key={i} color="gray" >{i}</Badge>)}
                         </div>
                     </div>
                   </div>
