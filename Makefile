@@ -1,4 +1,4 @@
-TAG = "registry-dev.gstou.ru/graduate-resume-front"
+TAG = "registry-dev.gstou.ru/events-front"
 
 all: buildx push
 buildx:
