@@ -1,1 +1,1 @@
-export * from './users-list'
+export * from './events-list'

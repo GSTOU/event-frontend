@@ -7,7 +7,7 @@ import { NotFound404 } from "../../core/404";
 import { AddUser } from "../../core/add-user/add-user";
 import { Layout } from "../../core/layout/layout";
 import { UserCard } from "../../core/user-card/user-card";
-import { UsersList } from "../../core/users-list";
+import { EventsList } from "../../core/users-list";
 import { getCookie } from "../../service/utils";
   
  export const router = createBrowserRouter([
@@ -16,7 +16,7 @@ import { getCookie } from "../../service/utils";
     children:[
       {
       path: "/",
-      element: <UsersList />,
+      element: <EventsList />,
       },
       {
         path: '*',
@@ -30,10 +30,12 @@ import { getCookie } from "../../service/utils";
         path: "/add",
         element: <AddUser />,
       },
-      ...(getCookie('token') ? [ {
+      ...(getCookie('token') ? [ 
+        {
         path: "/edit/:userId",
         element: <AddUser editMode />,
-      }] : [])
+        }
+      ] : [])
     ],
   }
 ]);
