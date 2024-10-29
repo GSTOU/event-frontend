@@ -58,24 +58,24 @@ export const EventsList = () => {
                   />
                 </div>
                 <div className="p-2 pt-0">
-                  <div className="flex justify-between border-b-2 font-bold  text-my-red">
-                    <div>{item?.location?.name}</div>
-                    <div>
-                      {item?.date}, {item?.time?.[0][0]}:{item?.time?.[0][1]}-
-                      {item?.time?.[1][0]}:{item?.time?.[1][1]}
-                    </div>
-                  </div>
                   <div className="mt-2 text-xl font-bold">{item?.title}</div>
-                  <div className="text-gray-400">Описание:</div>
+                  {/* <div className="text-gray-400">Описание:</div>
                   <div>{item?.description}</div>
                   <div className="text-gray-400">Руководитель мероприятия:</div>
                   <div className="font-bold">{item?.head?.name}</div>
                   <div className="text-gray-400">
                     Ответственный мероприятия:
                   </div>
-                  <div className="font-bold">{item?.responsible?.name}</div>
-                  <div className="text-gray-400">Тип мероприятия:</div>
-                  <div className="font-bold">{item?.categories?.name}</div>
+                  <div className="font-bold">{item?.responsible?.name}</div> */}
+                  {/* <div className="text-gray-400">Тип мероприятия:</div>
+                  <div className="font-bold">{item?.categories?.name}</div> */}
+                  <div className="mt-4 flex justify-between border-b-2 text-sm font-thin text-slate-600">
+                    <div>{item?.location?.name}</div>
+                    <div>
+                      {item?.date}, {item?.time?.[0][0]}:{item?.time?.[0][1]}-
+                      {item?.time?.[1][0]}:{item?.time?.[1][1]}
+                    </div>
+                  </div>
                 </div>
                 <div className="flex flex-wrap gap-2 p-2 pt-0">
                   {item?.tags?.map((i: string) => (
