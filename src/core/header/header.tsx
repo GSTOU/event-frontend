@@ -102,6 +102,7 @@ export function Header() {
                       width: '100%',
                       maxWidth: 340,
                     }}
+                    className="rounded-md bg-white p-4 pr-8"
                   >
                     <QRCode
                       size={256}
@@ -113,6 +114,7 @@ export function Header() {
                       value="https://gstou.ru/"
                       viewBox="0 0 256 256"
                     />
+                    <div>Подробнее о мероприятии</div>
                   </div>
                 </div>
               </div>
