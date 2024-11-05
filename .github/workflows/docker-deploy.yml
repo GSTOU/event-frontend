@@ -1,0 +1,34 @@
+name: Docker Deploy
+
+on:
+  push:
+    branches: ["master"]
+
+env:
+  TAG: registry-dev.gstou.ru/events-front
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login registry-dev.gstou.ru -u ${{ secrets.REGISTRY_LOGIN }} --password-stdin
+
+      - name: Build Docker Image
+        run: docker buildx build -t $TAG .
+
+      - name: Push Docker Image
+        run: docker push $TAG
+
+      - name: Deploy Docker image (SSH)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 31.173.210.218
+          username: isu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 2445
+          script: |
+            cd /home/isu/github/forms
+            docker compose up -d --no-deps frontend
