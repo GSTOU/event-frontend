@@ -17,12 +17,12 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
       })
       .then((res) => {
         setToken(res?.data?.access_token);
-      })
-      .catch(() => {
-        setTimeout(() => {
-          document.location.reload();
-        }, 5000);
       });
+    // .catch(() => {
+    //   setTimeout(() => {
+    //     document.location.reload();
+    //   }, 5000);
+    // });
   }, []);
 
   const value = { token };

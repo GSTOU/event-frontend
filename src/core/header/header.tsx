@@ -9,7 +9,6 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { TbCalendarTime } from 'react-icons/tb';
 import QRCode from 'react-qr-code';
-import { Link } from 'react-router-dom';
 
 import { AppContext } from '../../App-provider';
 import Logo from '../../assets/images/logo.svg';
@@ -164,9 +163,7 @@ export function Header() {
           style={{ backdropFilter: 'blur(25px)' }}
         >
           <div className="">
-            <Link to="/">
-              <img style={{ height: 71 }} src={Logo} alt="Gstou logo" />
-            </Link>
+            <img style={{ height: 71 }} src={Logo} alt="Gstou logo" />
           </div>
           <h1 className="text-5xl font-semibold">Календарь мероприятий</h1>
         </div>

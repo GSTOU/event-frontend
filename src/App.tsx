@@ -10,10 +10,10 @@ import 'dayjs/locale/ru';
 import { MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RouterProvider } from 'react-router-dom';
 
 import AppProvider from './App-provider';
-import { router } from './libs/route/routs';
+import { EventsList } from './core/events-list';
+import { Layout } from './core/layout/layout';
 
 const queryClient = new QueryClient();
 
@@ -22,8 +22,11 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <MantineProvider>
         <AppProvider>
+          asd
           <Notifications />
-          <RouterProvider router={router} />
+          <Layout>
+            <EventsList />
+          </Layout>
         </AppProvider>
       </MantineProvider>
     </QueryClientProvider>
