@@ -24,7 +24,7 @@ export const useGetEventsList = ({
   size: number;
 }) => {
   const query = useQuery({
-    queryKey: ['getEventsList', page],
+    queryKey: ['getEventsList', page, size],
     queryFn: () => getEventsList({ page, size }),
   });
 
