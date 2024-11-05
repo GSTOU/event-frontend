@@ -2,14 +2,19 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-restricted-imports */
-import { Badge, Image, Pagination } from '@mantine/core';
+import { Badge, Image, LoadingOverlay, Pagination } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
+import { useContext, useEffect, useState } from 'react';
 
+import { AppContext } from '../../App-provider';
 import { useGetEventsList } from '../../service/get-events-list';
+dayjs.locale('ru');
 
 export const EventsList = () => {
-  const pageSize = 20;
+  const { token } = useContext(AppContext);
+
+  const pageSize = 15;
   const [page, onChange] = useState(1);
 
   const form = useForm({
@@ -21,68 +26,74 @@ export const EventsList = () => {
     },
   });
 
-  const { data, count } = useGetEventsList({
+  const { data } = useGetEventsList({
     page: page,
     size: pageSize,
-    ...form.values,
+    token,
   });
+  const paginationPageCount = data?.meta?.paginationPageCount;
 
-  useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    }, 500);
-  }, [page]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     window.scrollTo({
+  //       top: 820,
+  //       behavior: 'smooth',
+  //     });
+  //   }, 500);
+  // }, [page]);
+
+  if (!token) {
+    return (
+      <LoadingOverlay visible={true} overlayProps={{ radius: 'sm', blur: 2 }} />
+    );
+  }
 
   return (
     <div className="mx-auto mt-8 grid max-w-container  items-center gap-2 md:flex-row md:items-stretch">
       <h1 style={{ fontSize: 56 }}>Все мероприятия</h1>
-      <div className="mt-4 grid gap-6 px-4 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 ">
-        {data?.map((item: any) => {
+      <div className="mt-4 grid gap-6 px-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 ">
+        {data?.items?.map((item: any) => {
           return (
-            <div key={item?._id} className="shadow-card">
-              <div className="flex flex-col gap-2 p-2">
-                <div className="rounded-md pl-2 pt-2 text-center">
+            <div key={item?.id} className="shadow-card">
+              <div className="flex h-full flex-col gap-2">
+                <div className="relative rounded-[1em] bg-black  text-center">
                   <Image
                     radius="lg"
                     w="100%"
-                    h="220px"
+                    h="330px"
                     src={
-                      item?.image
-                        ? String(item?.image)
+                      item?.photo
+                        ? String(item?.photo)
                         : 'https://gstou.ru/university/profiles/profile.jpg'
                     }
                     alt={item?.full_name}
+                    className="opacity-70"
                   />
+                  <a
+                    href={`https://leader-id.ru/events/${item?.id}`}
+                    target="_blank"
+                    className="absolute bottom-6 right-4 rounded-md px-4 py-2 text-white shadow-my-cardShadow"
+                    style={{ backdropFilter: 'blur(25px)' }}
+                    rel="noreferrer"
+                  >
+                    Узнать подробнее
+                  </a>
                 </div>
-                <div className="p-2 pt-0">
-                  <div className="mt-2 text-xl font-bold">{item?.title}</div>
-                  {/* <div className="text-gray-400">Описание:</div>
-                  <div>{item?.description}</div>
-                  <div className="text-gray-400">Руководитель мероприятия:</div>
-                  <div className="font-bold">{item?.head?.name}</div>
-                  <div className="text-gray-400">
-                    Ответственный мероприятия:
+                <div className="flex h-full flex-col justify-between p-5 pt-0">
+                  <div className="mt-2 text-xl font-bold">
+                    {item?.full_name}
                   </div>
-                  <div className="font-bold">{item?.responsible?.name}</div> */}
-                  {/* <div className="text-gray-400">Тип мероприятия:</div>
-                  <div className="font-bold">{item?.categories?.name}</div> */}
-                  <div className="mt-4 flex justify-between border-b-2 text-sm font-thin text-slate-600">
-                    <div>{item?.location?.name}</div>
-                    <div>
-                      {item?.date}, {item?.time?.[0][0]}:{item?.time?.[0][1]}-
-                      {item?.time?.[1][0]}:{item?.time?.[1][1]}
+                  <div>
+                    <div className="mt-4 flex justify-between  text-sm font-thin text-slate-600">
+                      <div>
+                        {dayjs(item?.date_start)?.format('DD MMMM YYYY, HH:mm')}{' '}
+                        - {dayjs(item?.date_end)?.format('DD MMMM YYYY, HH:mm')}
+                      </div>
+                    </div>
+                    <div className="font-semibold">
+                      <div>{item?.space?.address?.title}</div>
                     </div>
                   </div>
-                </div>
-                <div className="flex flex-wrap gap-2 p-2 pt-0">
-                  {item?.tags?.map((i: string) => (
-                    <Badge key={i} color="gray">
-                      {i}
-                    </Badge>
-                  ))}
                 </div>
               </div>
             </div>
@@ -95,7 +106,7 @@ export const EventsList = () => {
             control:
               '!bg-my-blue !text-white data-[active=true]:!bg-my-red data-[active=true]:!border-my-blue data-[disabled=true]:!opacity-40',
           }}
-          total={Math.ceil(count || 0 / pageSize) || 0}
+          total={paginationPageCount}
           value={page}
           onChange={onChange}
         />
