@@ -5,15 +5,12 @@
 import { Image, LoadingOverlay, Pagination } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import dayjs from 'dayjs';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { AppContext } from '../../App-provider';
 import { useGetEventsList } from '../../service/get-events-list';
 dayjs.locale('ru');
 
 export const EventsList = () => {
-  const { token } = useContext(AppContext);
-
   const pageSize = 15;
   const [page, onChange] = useState(1);
 
@@ -29,7 +26,6 @@ export const EventsList = () => {
   const { data, isFetching } = useGetEventsList({
     page: page,
     size: pageSize,
-    token,
   });
   const paginationPageCount = data?.meta?.paginationPageCount;
 
@@ -41,12 +37,6 @@ export const EventsList = () => {
       });
     }, 500);
   }, [page]);
-
-  if (!token) {
-    return (
-      <LoadingOverlay visible={true} overlayProps={{ radius: 'sm', blur: 2 }} />
-    );
-  }
 
   return (
     <div className="mx-auto mt-8 grid max-w-container  items-center gap-2 md:flex-row md:items-stretch">

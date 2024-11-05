@@ -11,7 +11,6 @@ import { MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import AppProvider from './App-provider';
 import { EventsList } from './core/events-list';
 import { Layout } from './core/layout/layout';
 
@@ -21,13 +20,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <MantineProvider>
-        <AppProvider>
-          asd
-          <Notifications />
-          <Layout>
-            <EventsList />
-          </Layout>
-        </AppProvider>
+        <Notifications />
+        <Layout>
+          <EventsList />
+        </Layout>
       </MantineProvider>
     </QueryClientProvider>
   );

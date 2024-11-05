@@ -4,23 +4,20 @@
 import { Carousel } from '@mantine/carousel';
 import dayjs from 'dayjs';
 import Autoplay from 'embla-carousel-autoplay';
-import { useContext, useRef } from 'react';
+import { useRef } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { TbCalendarTime } from 'react-icons/tb';
 import QRCode from 'react-qr-code';
 
-import { AppContext } from '../../App-provider';
 import Logo from '../../assets/images/logo.svg';
 import { useGetEventsList } from '../../service/get-events-list';
 
 export function Header() {
-  const { token } = useContext(AppContext);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const { data } = useGetEventsList({
     page: 1,
     size: 10,
-    token,
   });
 
   return (

@@ -1,41 +1,31 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
+import { apiClient } from '../libs/axios';
 
 export const getEventsList = async ({
   page,
   size,
-  token,
 }: {
-  token: string;
   page?: number;
   size?: number;
 }) => {
-  const data = axios.get(
-    `https://apps.leader-id.ru/api/v1/events/search?paginationPage=${page}&paginationSize=${size}&placeIds%5B%5D=1295`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
+  const data = apiClient.get(`api/v1/leader/events?page=${page}&size=${size}`);
 
   return data;
 };
 
 export const useGetEventsList = ({
   page = 1,
-  size = 10,
-  token,
+  size = 9,
 }: {
-  token: string;
   page: number;
   size: number;
 }) => {
   const query = useQuery({
-    queryKey: ['getEventsList', page, token],
-    queryFn: () => (token ? getEventsList({ page, size, token }) : null),
+    queryKey: ['getEventsList', page],
+    queryFn: () => getEventsList({ page, size }),
   });
 
   const data = query?.data?.data;
