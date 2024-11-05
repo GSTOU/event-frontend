@@ -62,28 +62,30 @@ export const EventsList = () => {
           return (
             <div key={item?.id} className="shadow-card">
               <div className="flex h-full flex-col gap-2">
-                <div className="relative rounded-[1em] bg-black  text-center">
-                  <Image
-                    radius="lg"
-                    w="100%"
-                    h="330px"
-                    src={
-                      item?.photo
-                        ? String(item?.photo)
-                        : 'https://gstou.ru/university/profiles/profile.jpg'
-                    }
-                    alt={item?.full_name}
-                    className="opacity-70"
-                  />
-                  <a
-                    href={`https://leader-id.ru/events/${item?.id}`}
-                    target="_blank"
-                    className="absolute bottom-6 right-4 rounded-md px-4 py-2 text-white shadow-my-cardShadow"
-                    style={{ backdropFilter: 'blur(25px)' }}
-                    rel="noreferrer"
-                  >
-                    Узнать подробнее
-                  </a>
+                <div className="relative rounded-[1em]   text-center">
+                  <div className="bg-black">
+                    <Image
+                      w="100%"
+                      h="330px"
+                      src={
+                        item?.photo
+                          ? String(item?.photo)
+                          : 'https://gstou.ru/university/profiles/profile.jpg'
+                      }
+                      alt={item?.full_name}
+                      className="opacity-70"
+                      classNames={{ root: 'rounded-t-[1em]' }}
+                    />
+                    <a
+                      href={`https://leader-id.ru/events/${item?.id}`}
+                      target="_blank"
+                      className="absolute bottom-6 right-4 rounded-md px-4 py-2 text-white shadow-my-cardShadow"
+                      style={{ backdropFilter: 'blur(25px)' }}
+                      rel="noreferrer"
+                    >
+                      Узнать подробнее
+                    </a>
+                  </div>
                 </div>
                 <div className="flex h-full flex-col justify-between p-5 pt-0">
                   <div className="mt-2 text-xl font-bold">
