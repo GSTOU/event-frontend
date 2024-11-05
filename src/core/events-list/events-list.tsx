@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-restricted-imports */
-import { Badge, Image, LoadingOverlay, Pagination } from '@mantine/core';
+import { Image, LoadingOverlay, Pagination } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import dayjs from 'dayjs';
 import { useContext, useEffect, useState } from 'react';
@@ -33,14 +33,14 @@ export const EventsList = () => {
   });
   const paginationPageCount = data?.meta?.paginationPageCount;
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     window.scrollTo({
-  //       top: 820,
-  //       behavior: 'smooth',
-  //     });
-  //   }, 500);
-  // }, [page]);
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({
+        top: 820,
+        behavior: 'smooth',
+      });
+    }, 500);
+  }, [page]);
 
   if (!token) {
     return (
