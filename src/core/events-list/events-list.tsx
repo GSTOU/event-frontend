@@ -50,7 +50,9 @@ export const EventsList = () => {
 
   return (
     <div className="mx-auto mt-8 grid max-w-container  items-center gap-2 md:flex-row md:items-stretch">
-      <h1 style={{ fontSize: 56 }}>Все мероприятия</h1>
+      <h1 style={{ fontSize: 56 }} className="font-semibold">
+        Все мероприятия
+      </h1>
       <div className="relative mt-4 grid min-h-60 gap-6 px-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
         <LoadingOverlay
           visible={isFetching}
